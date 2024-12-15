@@ -17,21 +17,34 @@
         id="originalImage"
         required
       /><br /><br />
-
       <button type="submit">Encode</button>
     </form>
 
-    <h2>Decode Image</h2>
-    <form action="/decode" method="post" enctype="multipart/form-data">
-      <label for="encodedImage">Encoded Image:</label>
-      <input
-        type="file"
-        name="encodedImage"
-        id="encodedImage"
-        required
-      /><br /><br />
-
-      <button type="submit">Decode</button>
+    <h2>Decode Image from URL</h2>
+    <form id="decodeForm">
+      <label for="imageUrl">Encoded Image URL:</label>
+      <input type="url" name="imageUrl" id="imageUrl" required /><br /><br />
+      <button type="button" onclick="decodeImage()">Decode</button>
     </form>
+
+    <script>
+      async function decodeImage() {
+        const imageUrl = document.getElementById("imageUrl").value;
+        const response = await fetch("/decode-url", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ imageUrl }),
+        });
+        if (response.ok) {
+          const blob = await response.blob();
+          const link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          link.download = "decoded.jpg";
+          link.click();
+        } else {
+          alert("Decoding failed");
+        }
+      }
+    </script>
   </body>
 </html>
