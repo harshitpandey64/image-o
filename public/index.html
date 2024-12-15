@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Encoder/Decoder</title>
+  </head>
+  <body>
+    <h1>Image Encoder/Decoder</h1>
+
+    <h2>Encode Image</h2>
+    <form action="/encode" method="post" enctype="multipart/form-data">
+      <label for="originalImage">Original Image:</label>
+      <input
+        type="file"
+        name="originalImage"
+        id="originalImage"
+        required
+      /><br /><br />
+
+      <button type="submit">Encode</button>
+    </form>
+
+    <h2>Decode Image</h2>
+    <form action="/decode" method="post" enctype="multipart/form-data">
+      <label for="encodedImage">Encoded Image:</label>
+      <input
+        type="file"
+        name="encodedImage"
+        id="encodedImage"
+        required
+      /><br /><br />
+
+      <button type="submit">Decode</button>
+    </form>
+  </body>
+</html>
